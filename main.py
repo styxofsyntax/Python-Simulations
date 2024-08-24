@@ -27,4 +27,5 @@ ax.set(xlim=(-5, 5), ylim=(-5, 5))
 ax.format_coord = lambda x, y: ""
 
 plt.connect('motion_notify_event', mouse_move)
+plt.axis('off')
 plt.show()
