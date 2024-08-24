@@ -8,8 +8,11 @@ def mouse_move(event):
 
 
 def update_plot(U, V):
-    quiver.set_UVC(-X + U, -Y + V)
-    plt.draw()
+    try:
+        quiver.set_UVC(-X + U, -Y + V)
+        plt.draw()
+    except:
+        pass
 
 
 plt.style.use('_mpl-gallery-nogrid')
