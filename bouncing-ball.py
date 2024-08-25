@@ -16,11 +16,19 @@ def update_plot(ball_coords):
     canvas.set_offsets(ball_coords)
     plt.draw()
 
-rate = -0.08
-path_down = np.arange(y, 0.12, rate)
+rate = -0.06
+path_down = np.arange(y, 0.1, rate)
+damping_rate = 2
 
 while True:
     for i in path_down:
         ball_move(i)
         plt.pause(0.01)
-    path_down = path_down[::-1]
+    path_up = path_down[::-1][:-damping_rate]
+    for i in path_up:
+        ball_move(i)
+        plt.pause(0.01)
+    path_down = path_up[::-1]
+    if len(path_down)==0:
+        break
+plt.show()
