@@ -9,7 +9,17 @@ def ball_move(rate):
 
 def update_plot(UV):
     U, V = UV
-    quiver.set_UVC(-X + U, -Y + V)
+
+    magnitude = 5
+    X_ = -X + U
+    Y_ = -Y + V
+
+    r = np.sqrt(X_**2 + Y_**2)
+    X_norm, Y_norm = X_/r, Y_/r
+
+    quiver.set_UVC(magnitude*X_norm, magnitude*Y_norm)
+
+    plt.axis('equal')
     plt.draw()
 
 
@@ -32,8 +42,18 @@ ax.add_patch(ball)
 plt.axis('off')
 
 rate = 0.1
-for i in np.arange(0, SIZE*2, rate):
-    ball_move(rate)
-    plt.pause(0.01)
+path = np.arange(0, SIZE*2, rate)
+reverse = False
 
-plt.show()
+while(True):
+    for i in path:
+        if reverse == True:
+            ball_move(-rate)
+        else:
+            ball_move(rate)
+
+        plt.pause(0.01)
+    
+    reverse = not reverse
+
+# plt.show()
