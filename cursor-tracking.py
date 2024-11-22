@@ -9,14 +9,23 @@ def mouse_move(event):
 
 def update_plot(U, V):
     try:
-        quiver.set_UVC(-X + U, -Y + V)
+        magnitude = 2
+        X_ = -X + U
+        Y_ = -Y + V
+
+        r = np.sqrt(X_**2 + Y_**2)
+        X_norm, Y_norm = X_/r, Y_/r
+
+        quiver.set_UVC(magnitude*X_norm, magnitude*Y_norm)
+
+        plt.axis('equal')
         plt.draw()
     except:
         pass
 
 
 plt.style.use('_mpl-gallery-nogrid')
-x = np.linspace(-4, 4, 10)
+x = np.linspace(-8, 8, 10)
 y = np.linspace(-4, 4, 10)
 X, Y = np.meshgrid(x, y)
 
